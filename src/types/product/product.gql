@@ -1,3 +1,6 @@
+# This defines the schema for all product queries
+# it is kind of like a model, but for GQL
+
 enum ProductType {
   GAMING_PC
   BIKE
