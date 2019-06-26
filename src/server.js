@@ -1,5 +1,5 @@
 import { ApolloServer } from 'apollo-server'
-import { loadTypeSchema } from './utils/schema'
+// import { loadTypeSchema } from './utils/schema'
 import { authenticate } from './utils/auth'
 import { merge } from 'lodash'
 import config from './config'
@@ -12,16 +12,32 @@ const types = ['product', 'coupon', 'user']
 
 export const start = async () => {
   const rootSchema = `
+
+    type Cat {
+      name: String
+    }
+
+    type Query {
+      myCat: Cat
+    }
     schema {
       query: Query
-      mutation: Mutation
     }
   `
-  const schemaTypes = await Promise.all(types.map(loadTypeSchema))
+  // const schemaTypes = await Promise.all(types.map(loadTypeSchema))
 
   const server = new ApolloServer({
-    typeDefs: [rootSchema, ...schemaTypes],
-    resolvers: merge({}, product, coupon, user),
+    typeDefs: [rootSchema],
+    // resolvers: merge({}, product, coupon, user),
+    resolvers: {
+      Query: {
+        myCat() {
+          return {
+            name: 'Garfield'
+          }
+        }
+      }
+    },
     async context({ req }) {
       const user = await authenticate(req)
       return { user }
