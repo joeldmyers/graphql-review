@@ -15,10 +15,12 @@ export const start = async () => {
 
     type Cat {
       name: String
+      age: Int
     }
 
     type Query {
       myCat: Cat
+      hello: String
     }
     schema {
       query: Query
@@ -35,6 +37,9 @@ export const start = async () => {
           return {
             name: 'Garfield'
           }
+        },
+        hello() {
+          return 'Hi there!'
         }
       }
     },
