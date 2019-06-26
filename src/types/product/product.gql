@@ -48,12 +48,12 @@ input UpdateProductInput {
 
 extend type Query {
   products: [Product]!
-  product: Product!
+  product(id: ID!): Product!
 }
 
 extend type Mutation {
   newProduct(input: NewProductInput!): Product!
-  updateProduct(input: UpdateProductInput!): Product!
+  updateProduct(id: ID!, input: UpdateProductInput!): Product!
   removeProduct(id: ID!): Product!
 }
 
