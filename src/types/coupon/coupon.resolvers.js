@@ -5,7 +5,7 @@ import { roles } from '../../utils/auth'
 // resolvers for coupon
 const coupon = (_, args, ctx) => {
   if (!ctx.user) {
-    throw new AuthenticationError()
+    throw new AuthenticationError();
   }
   return Coupon.findById(args.id)
     .lean()
